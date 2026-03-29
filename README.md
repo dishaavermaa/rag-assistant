@@ -13,7 +13,7 @@ This project demonstrates a **basic RAG pipeline**:
 3. Inject context into prompt
 4. Generate response using LLM
 
-It is designed as a **learning + interview-ready project** for understanding how RAG systems work before moving to vector databases.
+It is designed as a **learning project** for understanding how RAG systems work before moving to vector databases.
 
 ---
 
@@ -62,8 +62,8 @@ rag_assistant/
 ### 1. Clone the repository
 
 ```
-git clone https://github.com/your-username/insurellm-rag.git
-cd insurellm-rag
+git clone https://github.com/dishaavermaa/rag-assistant.git
+cd rag_assistant
 ```
 
 ---
@@ -107,7 +107,7 @@ App will open in browser automatically.
 
 ## 📚 Knowledge Base Format
 
-### Employees Example (`employees/alex_lancaster.md`)
+### Employees Example (`employees/avery_lancaster.md`)
 
 ```
 # Avery Lancaster
@@ -116,7 +116,7 @@ Avery Lancaster co-founded Insurellm in 2015 and has since guided the company to
 
 ---
 
-### Products Example (`products/claimgenius.md`)
+### Products Example (`products/claimllm.md`)
 
 ```
 # Claimllm
