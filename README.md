@@ -13,7 +13,7 @@ This project demonstrates a **basic RAG pipeline**:
 3. Inject context into prompt
 4. Generate response using LLM
 
-It is designed as a **learning project** for understanding how RAG systems work before moving to vector databases.
+This project demonstrates a foundational implementation of Retrieval Augmented Generation (RAG), providing a structured approach to contextual information retrieval prior to integrating vector-based architectures.
 
 ---
 
