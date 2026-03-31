@@ -1,3 +1,18 @@
 openai
 gradio
 python-dotenv
+
+# LangChain ecosystem
+langchain
+langchain-openai
+langchain-chroma
+langchain-huggingface
+langchain-community
+langchain-text-splitters
+
+# Embeddings + vector DB
+chromadb
+sentence-transformers
+
+# Tokenization
+tiktoken
