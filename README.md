@@ -1,51 +1,127 @@
-# 🧠 Insurellm Mini RAG System
+# 🧠 Insurellm RAG Assistant
 
-A **simple Retrieval-Augmented Generation (RAG)** system built using **Python, OpenAI, and Gradio**, designed to answer questions about company **employees** and **products** using a local knowledge base.
+A Retrieval-Augmented Generation (RAG) system built using **Python, OpenAI, LangChain, and Gradio**, designed to deliver accurate, context-aware responses based on a structured knowledge base of company **employees** and **products**.
 
 ---
 
 ## 🚀 Overview
 
-This project demonstrates a **basic RAG pipeline**:
+This project implements a **progressive RAG architecture**, evolving from a baseline keyword-driven retrieval system to an advanced **embedding-based semantic retrieval pipeline**.
 
-1. Load documents from local knowledge base
-2. Retrieve relevant documents based on user query
-3. Inject context into prompt
-4. Generate response using LLM
+The system retrieves relevant context from a local knowledge base and uses a Large Language Model (LLM) to generate **grounded, precise, and reliable responses**.
 
-This project demonstrates a foundational implementation of Retrieval Augmented Generation (RAG), providing a structured approach to contextual information retrieval prior to integrating vector-based architectures.
+---
+
+## 🌿 Branch Structure
+
+This repository is organized into multiple branches to clearly separate different stages of the system's evolution:
+
+### 🔹 `main` (Enhanced RAG System)
+
+Contains the **current advanced implementation**, including:
+
+* LangChain-based document loading
+* Recursive chunking with overlap
+* Embedding generation (HuggingFace / OpenAI)
+* Chroma vector database for similarity search
+* Semantic retrieval pipeline
+* Context-aware LLM response generation
+* Gradio-based interactive UI
+
+This branch represents the **most complete and production-aligned version** of the system.
+
+---
+
+### 🚀 `feature-enhancement` (Ongoing Improvements)
+
+Used for iterative development and experimentation on top of the enhanced pipeline.
+
+Typical additions include:
+
+* Retrieval optimizations
+* Hybrid search (keyword + semantic)
+* Reranking strategies
+* Performance improvements
+* Feature extensions
+
+---
+
+### 🧩 `legacy-code` (Baseline RAG System)
+
+Contains the original implementation based on:
+
+* Markdown document loading
+* Text normalization and tokenization
+* Keyword overlap-based scoring
+* Direct prompt context injection
+
+This version serves as a **reference for foundational RAG concepts** and highlights the evolution toward semantic retrieval.
 
 ---
 
 ## 🏗️ Project Structure
 
-```
+```bash
 rag_assistant/
 │
 ├── app.py
 ├── requirements.txt
-├── .env
+├── README.md
 ├── .gitignore
 │
 └── knowledge-base/
     ├── employees/
-    │   ├── avery_lancaster.md
-    │   └── ...
     └── products/
-        ├── claimllm.md
-        └── ...
 ```
 
 ---
 
 ## ⚙️ Features
 
-* 🔍 Keyword-based document retrieval
-* 📂 Multiple knowledge sources (employees + products)
-* 🧾 Markdown (`.md`) support
-* 🧠 Context-aware LLM responses
-* 💬 Interactive UI using Gradio
-* ❌ Safe fallback when answer is unknown
+### Core Features
+
+* 📂 Structured knowledge base (employees + products)
+* 💬 Interactive chat interface using Gradio
+* 🧠 Context-grounded LLM responses
+* ❌ Controlled hallucination via prompt constraints
+
+---
+
+### Advanced Features (main branch)
+
+* 🔍 Semantic search using embeddings
+* ✂️ Recursive document chunking with overlap
+* 🧠 Vector database (Chroma) for efficient retrieval
+* 📌 Metadata-enriched document indexing
+* 📊 Token and corpus analysis
+
+---
+
+## 🧠 System Architecture
+
+### 🔹 Baseline (legacy-code)
+
+```text
+User Query
+→ Tokenization
+→ Keyword Matching
+→ Document Selection
+→ Prompt Injection
+→ LLM Response
+```
+
+---
+
+### 🚀 Enhanced (main branch)
+
+```text
+User Query
+→ Query Embedding
+→ Vector Similarity Search (Chroma)
+→ Top-K Relevant Chunks
+→ Context Injection
+→ LLM Response
+```
 
 ---
 
@@ -54,23 +130,22 @@ rag_assistant/
 * "Who is Avery Lancaster?"
 * "What does Claimllm do?"
 
-
 ---
 
 ## 🛠️ Installation
 
-### 1. Clone the repository
+### 1. Clone repository
 
-```
+```bash
 git clone https://github.com/dishaavermaa/rag-assistant.git
-cd rag_assistant
+cd rag-assistant
 ```
 
 ---
 
 ### 2. Create virtual environment
 
-```
+```bash
 python3 -m venv .venv
 source .venv/bin/activate
 ```
@@ -79,17 +154,17 @@ source .venv/bin/activate
 
 ### 3. Install dependencies
 
-```
+```bash
 pip install -r requirements.txt
 ```
 
 ---
 
-### 4. Add OpenAI API Key
+### 4. Configure environment variables
 
 Create a `.env` file:
 
-```
+```env
 OPENAI_API_KEY=your_api_key_here
 ```
 
@@ -97,88 +172,48 @@ OPENAI_API_KEY=your_api_key_here
 
 ### 5. Run the application
 
-```
+```bash
 python app.py
 ```
-
-App will open in browser automatically.
 
 ---
 
 ## 📚 Knowledge Base Format
 
-### Employees Example (`employees/avery_lancaster.md`)
+### Example: Employee
 
-```
+```md
 # Avery Lancaster
-Avery Lancaster co-founded Insurellm in 2015 and has since guided the company to its current position as a leading Insurance Tech provider.
+ Avery Lancaster co-founded Insurellm in 2015 and has since guided the company to its current position as a leading Insurance Tech provider.
 ```
 
 ---
 
-### Products Example (`products/claimllm.md`)
+### Example: Product
 
-```
+```md
 # Claimllm
 Claimllm is Insurellm's revolutionary claims processing platform that transforms the claims experience for insurers, adjusters, and policyholders.
 ```
 
 ---
 
-## 🧠 How It Works
+## ⚠️ Limitations
 
-### 1. Document Loading
-
-* Reads `.md` files
-* Stores metadata (title, source, content)
-
-### 2. Retrieval
-
-* Tokenizes user query
-* Matches against document content + title
-* Scores relevance
-* Selects top-k documents
-
-### 3. Prompt Construction
-
-* Injects retrieved documents into system prompt
-* Adds structured context
-
-### 4. LLM Response
-
-* Uses OpenAI model (`gpt-4.1-nano`)
-* Returns concise, factual answers
+* Baseline branch relies on keyword matching (limited semantic understanding)
+* Vector store is rebuilt on each run (can be optimized with persistence strategy)
+* No reranking or retrieval evaluation metrics implemented yet
 
 ---
 
-## ⚠️ Limitations (Current Version)
+## 🚀 Future Enhancements
 
-* No embeddings (keyword-based retrieval only)
-* No vector database
-* Limited semantic understanding
-* No chunking for large documents
-
----
-
-## 🚀 Future Improvements
-
-* 🔹 Add embeddings (OpenAI / HuggingFace)
-* 🔹 Use vector DB (FAISS / Chroma / pgvector)
-* 🔹 Implement document chunking
-* 🔹 Add reranking
-* 🔹 Add citations in responses
-* 🔹 Add conversation-aware retrieval
-
----
-
-## 💡 Why This Project Matters
-
-This project demonstrates:
-
-* Core understanding of **RAG architecture**
-* Prompt engineering with context injection
-* Handling structured knowledge bases
-* Building AI-powered apps with UI
+* 🔹 Persistent vector index loading
+* 🔹 Hybrid retrieval (BM25 + embeddings)
+* 🔹 Cross-encoder / LLM-based reranking
+* 🔹 Retrieval evaluation metrics (recall@k, precision@k)
+* 🔹 Streaming responses
+* 🔹 Source attribution in UI
 
 ---
 
@@ -186,12 +221,20 @@ This project demonstrates:
 
 * Python
 * OpenAI API
+* LangChain
+* Chroma (Vector Database)
+* HuggingFace Embeddings
 * Gradio
-* dotenv
 
 ---
 
-## 🧑‍💻 Author
+## 💡 Key Insight
+
+This project demonstrates how improving the **retrieval layer** — from keyword matching to semantic search — significantly enhances the accuracy and reliability of LLM-generated responses.
+
+---
+
+## 👩‍💻 Author
 
 Disha Verma
 BTech 
@@ -199,8 +242,6 @@ Web Developer | AI Engineer
 
 ---
 
-## ⭐ If you found this useful
+## ⭐ Support
 
-Give this repo a ⭐ and feel free to contribute!
-
----
+If you found this project useful, consider giving it a ⭐ on GitHub.
